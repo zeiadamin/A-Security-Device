@@ -20,14 +20,14 @@
 #To Start we need to get input from the user
 #input_string = input()
 
-#we need to set initial values for the current_State and the lock_State let's assume that the initial state of the
+#we need to set initial values for the current_state and the lock_state let's assume that the initial state of the
 #system is locked
-#0 is Locked and 1 is Unlocked
-#current_State = 0          
-
-#The possible lock states are (0,1,2,3,4,5,6) where when you achieve 6 (up the ladder) and when that happen you
-#switch the current_State and then you reset the lock_State to 0
-#lock_State = 0             
+#0 is locked and 1 is unlocked
+current_state = 0          
+ 
+#the possible lock states are (0,1,2,3,4,5,6) where when you achieve 6 (up the ladder) and when that happen you
+#switch the current_state and then you reset the lock_state to 0
+lock_state = 0             
 
 #now we need to start thinking about the logic of the of the code itself 
 #we need to make sure that whenever we have a new input we need to check if the input is correct or not and change
@@ -36,34 +36,80 @@
 
 #Transition function that takes the user input as an argument and deals with the changes in the current_State
 #and lock_State
-# def Transition (char):
-#   if lock_State == 0 and char == 5:
-#       lock_State++
-#   elif lock_State == 1 and char == 6:
-#       lock_State++
-#   elif lock_State == 2 and char == 1:
-#       lock_State++
-#   elif lock_State == 3 and char == 7:
-#       lock_State++
-#   elif lock_State == 4 and char == 6:
-#       lock_State++
-#   elif lock_State == 5 and char == 1:
-#       lock_State = 0
-#       Change_Lock() #A function that changes the current_State and print the the change in state
-#   elif lock_State == 5 and char == 4:
-#       lock_State = 0
-#       Change_Lock() #A function that changes the current_State and print the the change in state
-#   else:
-#       lock_State = 0
+
+
+def transition (char):
+   global lock_state
+   global current_state
+   if lock_state == 0 and char == 5:
+       lock_state += 1
+       print (lock_state)
+   elif lock_state == 1 and char == 6:
+       lock_state += 1
+       print (lock_state)
+   elif lock_state == 2 and char == 1:
+       lock_state += 1
+       print (lock_state)
+   elif lock_state == 3 and char == 7:
+       lock_state += 1
+       print (lock_state)
+   elif lock_state == 4 and char == 6:
+       lock_state += 1
+       print (lock_state)
+   elif lock_state == 5 and char == 1:
+       lock_state = 0
+       print (lock_state)
+       change_lock() #a function that changes the current_state and print the the change in state
+   elif lock_state == 5 and char == 4:
+       lock_state = 0
+       print (lock_state)
+       change_lock() #a function that changes the current_state and print the the change in state
+   else:
+       lock_state = 0
+       print (lock_state)
 
 #A function that changes the current_State and print the the change in state
-# def Change_Lock ():
-#   if current_State == 0:
-#       current_State = 1
-#       print ("unlock")
-#   else:
-#       current_State = 0
-#       print ("lock")
+def change_lock ():
+   global current_state
+   if current_state == 0:
+       current_state = 1
+       print ("unlock")
+   else:
+       current_state = 0
+       print ("lock")
+
+
+#testing out the transition function and the change lock function 
+print ("5 is entered")
+transition (5)
+print ("6 is entered")
+transition (6)
+print ("1 is entered")
+transition (1)
+print ("7 is entered")
+transition (7)
+print ("6 is entered")
+transition (6)
+print ("1 is entered")
+transition (1)
+print ("3 is entered")
+transition (3)
+print ("5 is entered")
+transition (5)
+print ("6 is entered")
+transition (6)
+print ("4 is entered")
+transition (4)
+print ("7 is entered")
+transition (7)
+print ("6 is entered")
+transition (6)
+print ("4 is entered")
+transition (4)
+print ("1 is entered")
+transition (1)
+
+
 
 #now since we have all fuctions ready we just need to make a for loop where as long as the user has input the
 #transition function will be invoked 
