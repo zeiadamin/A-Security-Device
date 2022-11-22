@@ -59,11 +59,19 @@ def transition (char):
    elif lock_state == 5 and char == 1:
        lock_state = 0
        print (lock_state)
-       change_lock() #a function that changes the current_state and print the the change in state
+       if current_state == 0:
+        change_lock() #a function that changes the current_state and print the the change in state
+       else:
+        print ("unlock")
+
    elif lock_state == 5 and char == 4:
        lock_state = 0
        print (lock_state)
-       change_lock() #a function that changes the current_state and print the the change in state
+       if current_state == 1:
+        change_lock() #a function that changes the current_state and print the the change in state
+       else:
+        print ("lock")
+
    else:
        lock_state = 0
        print (lock_state)
@@ -92,23 +100,14 @@ print ("6 is entered")
 transition (6)
 print ("1 is entered")
 transition (1)
-print ("3 is entered")
-transition (3)
-print ("5 is entered")
-transition (5)
-print ("6 is entered")
-transition (6)
-print ("4 is entered")
-transition (4)
-print ("7 is entered")
-transition (7)
-print ("6 is entered")
-transition (6)
-print ("4 is entered")
-transition (4)
+print ("g is entered")
+transition ("g")
 print ("1 is entered")
 transition (1)
-
+print ("1 is entered")
+transition (1)
+print ("1 is entered")
+transition (1)
 
 
 #now since we have all fuctions ready we just need to make a for loop where as long as the user has input the
