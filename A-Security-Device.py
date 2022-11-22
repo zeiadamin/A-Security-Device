@@ -89,25 +89,61 @@ def change_lock ():
        print ("lock")
 
 
+input_list = []
+print_list = []
+
 while True:
-    passcode = ["_","_","_","_","_","_"]
-    print_passcode = ["_","_","_","_","_","_"]
+    user_input = getpass.getpass('')
+
+    if user_input in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+        input_list.append(user_input)
+        print_list.append("*")
+        print (*print_list)
+        transition(user_input)
+    else:
+        print ("Wrong Character")
+
+    if len(input_list) == 6:
+        if input_list != ["5","6","1","7","6","1"]:
+            if input_list != ["5","6","1","7","6","4"]:
+                print ("wrong passcode")
+        input_list = []
+        print_list = []
+
+
+
+    
+
+#while true:
+#    passcode = ["_","_","_","_","_","_"]
+#    print_passcode = ["_","_","_","_","_","_"]
 
    
-    for i in range(0,6):
-        user_input = getpass.getpass('')
-        passcode[i]=user_input
-        print_passcode[i]="*"
-        print(*print_passcode)
-        transition(user_input)
+#    for i in range(0,6):
+#        user_input = getpass.getpass('')
+#        passcode[i]=user_input
+#        print_passcode[i]="*"
+#        print(*print_passcode)
+#        transition(user_input)
 
-    if passcode != ["5","6","1","7","6","1"]:
-        if passcode != ["5","6","1","7","6","4"]:
-            print ("Wrong Passcode")
+#    if passcode != ["5","6","1","7","6","1"]:
+#        if passcode != ["5","6","1","7","6","4"]:
+#            print ("wrong passcode")
 
-    screen = ["_","_","_","_","_","_"]
-    print_passcode = ["_","_","_","_","_","_"]
+#    screen = ["_","_","_","_","_","_"]
+#    print_passcode = ["_","_","_","_","_","_"]
 
+#while true:
+#    passcode = []
+#    user_input = getpass.getpass('')
+#    if user_input in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+#        transition(user_input)
+#        print (len(passcode))
+#        if len(passcode) == 6:
+#            passcode = []
+        
+#        passcode.append(user_input)
+#        print (passcode)
 
 ##sumcounters = sumcounters + counter
 
