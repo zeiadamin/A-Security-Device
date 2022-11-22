@@ -1,3 +1,5 @@
+import random
+import getpass
 #We need to design a lock system where the user keep entering characters and these characters will unlock the system
 #if the user enter the correct code in a row 
 
@@ -41,32 +43,32 @@ lock_state = 0
 def transition (char):
    global lock_state
    global current_state
-   if lock_state == 0 and char == 5:
+   if lock_state == 0 and char == "5":
        lock_state += 1
-       print (lock_state)
-   elif lock_state == 1 and char == 6:
+       #print (lock_state)
+   elif lock_state == 1 and char == "6":
        lock_state += 1
-       print (lock_state)
-   elif lock_state == 2 and char == 1:
+       #print (lock_state)
+   elif lock_state == 2 and char == "1":
        lock_state += 1
-       print (lock_state)
-   elif lock_state == 3 and char == 7:
+       #print (lock_state)
+   elif lock_state == 3 and char == "7":
        lock_state += 1
-       print (lock_state)
-   elif lock_state == 4 and char == 6:
+       #print (lock_state)
+   elif lock_state == 4 and char == "6":
        lock_state += 1
-       print (lock_state)
-   elif lock_state == 5 and char == 1:
+       #print (lock_state)
+   elif lock_state == 5 and char == "1":
        lock_state = 0
-       print (lock_state)
+       #print (lock_state)
        if current_state == 0:
         change_lock() #a function that changes the current_state and print the the change in state
        else:
         print ("unlock")
 
-   elif lock_state == 5 and char == 4:
+   elif lock_state == 5 and char == "4":
        lock_state = 0
-       print (lock_state)
+       #print (lock_state)
        if current_state == 1:
         change_lock() #a function that changes the current_state and print the the change in state
        else:
@@ -74,7 +76,7 @@ def transition (char):
 
    else:
        lock_state = 0
-       print (lock_state)
+       #print (lock_state)
 
 #A function that changes the current_State and print the the change in state
 def change_lock ():
@@ -87,27 +89,51 @@ def change_lock ():
        print ("lock")
 
 
-#testing out the transition function and the change lock function 
-print ("5 is entered")
-transition (5)
-print ("6 is entered")
-transition (6)
-print ("1 is entered")
-transition (1)
-print ("7 is entered")
-transition (7)
-print ("6 is entered")
-transition (6)
-print ("1 is entered")
-transition (1)
-print ("g is entered")
-transition ("g")
-print ("1 is entered")
-transition (1)
-print ("1 is entered")
-transition (1)
-print ("1 is entered")
-transition (1)
+while True:
+    passcode = ["_","_","_","_","_","_"]
+    print_passcode = ["_","_","_","_","_","_"]
+
+   
+    for i in range(0,6):
+        user_input = getpass.getpass('')
+        passcode[i]=user_input
+        print_passcode[i]="*"
+        print(*print_passcode)
+        transition(user_input)
+
+    if passcode != ["5","6","1","7","6","1"]:
+        if passcode != ["5","6","1","7","6","4"]:
+            print ("Wrong Passcode")
+
+    screen = ["_","_","_","_","_","_"]
+    print_passcode = ["_","_","_","_","_","_"]
+
+
+##sumcounters = sumcounters + counter
+
+##print (sumcounters/numberoftrials)
+
+##testing out the transition function and the change lock function 
+#print ("5 is entered")
+#transition (5)
+#print ("6 is entered")
+#transition (6)
+#print ("1 is entered")
+#transition (1)
+#print ("7 is entered")
+#transition (7)
+#print ("6 is entered")
+#transition (6)
+#print ("1 is entered")
+#transition (1)
+#print ("g is entered")
+#transition ("g")
+#print ("1 is entered")
+#transition (1)
+#print ("1 is entered")
+#transition (1)
+#print ("1 is entered")
+#transition (1)
 
 
 #now since we have all fuctions ready we just need to make a for loop where as long as the user has input the
