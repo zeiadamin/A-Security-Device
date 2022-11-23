@@ -1,93 +1,39 @@
 import random
 import getpass
-#We need to design a lock system where the user keep entering characters and these characters will unlock the system
-#if the user enter the correct code in a row 
+import timeit
+import time
+import datetime
 
-#Ex:
-#913520334412451033444123970001112334451334410101
-#  unlock--^         ^--lock        unlock--^
-
-#561761 is the unlocking code
-#561764 is the locking code
-
-#__________________________________________________________________________
-#This will happen taking a Finite Automata approach where there are states and keys and if the key is correct
-#the state will move to the next
-
-#__________________________________________________________________________
-#To Achieve that we need to keep track of the current_State (q0,q1,q2,q3,q4,q5) and we also need to keep track if
-#the system is locked or unlocked let's  call that the lock_State
-
-#__________________________________________________________________________
-#To Start we need to get input from the user
-#input_string = input()
-
-#we need to set initial values for the current_state and the lock_state let's assume that the initial state of the
-#system is locked 
-#0 is locked and 1 is unlocked
 current_state = 0          
- 
-#the possible lock states are (0,1,2,3,4,5,6) where when you achieve 6 (up the ladder) and when that happen you 
-#switch the current_state and then you reset the lock_state to 0
 lock_state = 0             
-
-#now we need to start thinking about the logic of the of the code itself 
-#we need to make sure that whenever we have a new input we need to check if the input is correct or not and change
-#the state of the current_State and the lock_State as needed 
-#to handle this we need to have a function that handles this change of state and also handles the input checking 
-
-#Transition function that takes the user input as an argument and deals with the changes in the current_State
-#and lock_State
-
-#A transition function that keeps track of the input key and the lock state and changes the current lock based on the
-#Finite Automata logic
 def transition (char):
    global lock_state
    global current_state
    if lock_state == 0 and char == "5":
-       #now we are in the state q0 if the key is correct:6 then incement the state and move to state q1
        lock_state += 1
-       #print (lock_state)
    elif lock_state == 1 and char == "6":
-       #now we are in the state q1 if the key is correct:6 then incement the state and move to state q2
        lock_state += 1
-       #print (lock_state)
    elif lock_state == 2 and char == "1":
-       #now we are in the state q2 if the key is correct:6 then incement the state and move to state q3
        lock_state += 1
-       #print (lock_state)
    elif lock_state == 3 and char == "7":
-       #now we are in the state q3 if the key is correct:6 then incement the state and move to state q4
        lock_state += 1
-       #print (lock_state)
    elif lock_state == 4 and char == "6":
-       #now we are in the state q4 if the key is correct:6 then incement the state and move to state q5
        lock_state += 1
-       #print (lock_state 
    elif lock_state == 5 and char == "1":   
-       #now we are in the state q5 if the key is correct:6 then incement the state and move to state q6UNLOCK
        lock_state = 0
-       #print (lock_state)
        if current_state == 0:
-        change_lock() #a function that changes the current_state and print the the change in state
+        change_lock()
        else:
         print ("unlock")
-
    elif lock_state == 5 and char == "4":
-       #now we are in the state q5 if the key is correct:6 then incement the state and move to state q6UNLOCK
        lock_state = 0
-       #print (lock_state)
        if current_state == 1:
-        change_lock() #a function that changes the current_state and print the the change in state
+        change_lock()
        else:
         print ("lock")
-
    else:
-       #else then the key is wrong and the state is reset to q0
        lock_state = 0
-       #print (lock_state)
 
-#A function that changes the current_State and print the the change in state
 def change_lock ():
    global current_state
    if current_state == 0:
@@ -99,22 +45,108 @@ def change_lock ():
 
 
 ##############################################
-#THE KEYPAD
+#Intruder Estimate
 ##############################################
 
-#A list that keeps track of actual inputs
 input_list = []
-#a list that keep track of number of inputs till 6 and prints *s
 print_list = []
 
-#A loop that is always working
+#numberofTrials = 5
+#j = 0
+#count = 0
+#sumcount = 0
 
-numberofTrials = 5
-j = 0
+#Genrating random number and using them as keys for the device then couting the amount of time it takes to run
+#____________________________________________________________________________________________________________
+#for i in range (0,numberofTrials):
+#    print ("trial", i)
+#    while current_state != 1:
+#            print (lock_state)
+#            count += 1
+#            print (count)
+#            transition(str(random.randint(0,9)))
+#            if current_state == 1:
+#                current_state = 0
+#                sumcount = sumcount + count
+#                count = 0
+#    i += 1
+#print (sumcount/numberofTrials)
 
+#### NOTES ####
+#when generating random number of keys and running the keypad assuming that it takes a second for each key to
+#be entered the amount of seconds it took to unlock was 1112605 seconds
+
+#the process was repeated 5 times and then the average was 1552734 seconds
+
+#_______________________________________________________________________________________________________________
+
+#Now we need to test the actual time it takes to intrude by taking time stamps using the time it module
+
+count = 0
+t = time.localtime()
+
+st = time.time()
+##print ("trial", i)
 while current_state != 1:
         print (lock_state)
+        count += 1
+        print (count)
         transition(str(random.randint(0,9)))
 
+#i += 1
+et = time.time()
+res = et - st
 
-    
+print (res)
+
+#### NOTES ####
+#hen we use the time module to estimate the actual time it takes to break into the device the result was 16.125 seconds
+#but since it's a random distribution we need to generate multiple tests then average the time
+#_______________________________________________________________________________________________________________
+
+#we need to generate multiple tests then average the time
+
+#numberoftrials = 5
+#j = 0
+#count = 0
+#sumcount = 0
+#totaltime = 0
+#mint= 10000000
+#maxt= 0
+
+#for i in range(1, numberoftrials):
+#    t = time.localtime()
+
+#    st = time.time()
+#    ##print ("trial", i)
+#    while current_state != 1:
+#            print (lock_state)
+#            count += 1
+#            print (count)
+#            transition(str(random.randint(0,9)))
+#            current_state = 0
+
+#    et = time.time()
+#    res = et - st
+#    if res > maxt:
+#        maxt = res
+#    if res < maxt:
+#        mint = res
+#    i += 1
+#    et = time.time()
+#    res = et - st
+
+#    print (res)
+
+
+#averagetime = totaltime/numberoftrials
+#print (maxt)
+#print (mint)
+#print (averagetime)
+
+#### NOTES ####
+#The min time it took to break in was: 11.500 seconds
+#The maximum time it took to break in was:42.250 seconds
+#The average time it took to break in was:26.
+
+#_______________________________________________________________________________________________________________
