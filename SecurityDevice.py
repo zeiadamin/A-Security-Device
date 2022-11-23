@@ -123,7 +123,7 @@ while True:
         print ("Wrong Character")
 
     #if the 6 digits are entrered but they are wrong then print wrong passcode
-    if len(input_list) == 6:
+    if len(input_list) == 6:  
         if input_list != ["5","6","1","7","6","1"]:
             if input_list != ["5","6","1","7","6","4"]:
                 print ("wrong passcode")
