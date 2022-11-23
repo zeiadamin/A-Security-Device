@@ -45,21 +45,27 @@ def transition (char):
    global lock_state
    global current_state
    if lock_state == 0 and char == "5":
+       #now we are in the state q0 if the key is correct:6 then incement the state and move to state q1
        lock_state += 1
        #print (lock_state)
    elif lock_state == 1 and char == "6":
+       #now we are in the state q1 if the key is correct:6 then incement the state and move to state q2
        lock_state += 1
        #print (lock_state)
    elif lock_state == 2 and char == "1":
+       #now we are in the state q2 if the key is correct:6 then incement the state and move to state q3
        lock_state += 1
        #print (lock_state)
    elif lock_state == 3 and char == "7":
+       #now we are in the state q3 if the key is correct:6 then incement the state and move to state q4
        lock_state += 1
        #print (lock_state)
    elif lock_state == 4 and char == "6":
+       #now we are in the state q4 if the key is correct:6 then incement the state and move to state q5
        lock_state += 1
-       #print (lock_state)
-   elif lock_state == 5 and char == "1":
+       #print (lock_state 
+   elif lock_state == 5 and char == "1":   
+       #now we are in the state q5 if the key is correct:6 then incement the state and move to state q6UNLOCK
        lock_state = 0
        #print (lock_state)
        if current_state == 0:
@@ -68,6 +74,7 @@ def transition (char):
         print ("unlock")
 
    elif lock_state == 5 and char == "4":
+       #now we are in the state q5 if the key is correct:6 then incement the state and move to state q6UNLOCK
        lock_state = 0
        #print (lock_state)
        if current_state == 1:
@@ -76,6 +83,7 @@ def transition (char):
         print ("lock")
 
    else:
+       #else then the key is wrong and the state is reset to q0
        lock_state = 0
        #print (lock_state)
 
@@ -90,20 +98,31 @@ def change_lock ():
        print ("lock")
 
 
+##############################################
+#THE KEYPAD
+##############################################
+
+#A list that keeps track of actual inputs
 input_list = []
+#a list that keep track of number of inputs till 6 and prints *s
 print_list = []
 
+#A loop that is always working
 while True:
+    #getting the user keys
     user_input = getpass.getpass('')
 
+    #ignoring input other than keys from 1 to 9
     if user_input in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
         input_list.append(user_input)
         print_list.append("*")
         print (*print_list)
         transition(user_input)
     else:
+        #in case of a wrong input print wrong character 
         print ("Wrong Character")
 
+    #if the 6 digits are entrered but they are wrong then print wrong passcode
     if len(input_list) == 6:
         if input_list != ["5","6","1","7","6","1"]:
             if input_list != ["5","6","1","7","6","4"]:
@@ -113,68 +132,4 @@ while True:
 
 
 
-    
-
-#while true:
-#    passcode = ["_","_","_","_","_","_"]
-#    print_passcode = ["_","_","_","_","_","_"]
-
-   
-#    for i in range(0,6):
-#        user_input = getpass.getpass('')
-#        passcode[i]=user_input
-#        print_passcode[i]="*"
-#        print(*print_passcode)
-#        transition(user_input)
-
-#    if passcode != ["5","6","1","7","6","1"]:
-#        if passcode != ["5","6","1","7","6","4"]:
-#            print ("wrong passcode")
-
-#    screen = ["_","_","_","_","_","_"]
-#    print_passcode = ["_","_","_","_","_","_"]
-
-#while true:
-#    passcode = []
-#    user_input = getpass.getpass('')
-#    if user_input in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
-#        transition(user_input)
-#        print (len(passcode))
-#        if len(passcode) == 6:
-#            passcode = []
-        
-#        passcode.append(user_input)
-#        print (passcode)
-
-##sumcounters = sumcounters + counter
-
-##print (sumcounters/numberoftrials)
-
-##testing out the transition function and the change lock function 
-#print ("5 is entered")
-#transition (5)
-#print ("6 is entered")
-#transition (6)
-#print ("1 is entered")
-#transition (1)
-#print ("7 is entered")
-#transition (7)
-#print ("6 is entered")
-#transition (6)
-#print ("1 is entered")
-#transition (1)
-#print ("g is entered")
-#transition ("g")
-#print ("1 is entered")
-#transition (1)
-#print ("1 is entered")
-#transition (1)
-#print ("1 is entered")
-#transition (1)
-
-
-#now since we have all fuctions ready we just need to make a for loop where as long as the user has input the
-#transition function will be invoked 
-#for char in input_string:
-#    Transition (char)
     
