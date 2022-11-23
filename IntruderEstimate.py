@@ -108,28 +108,13 @@ input_list = []
 print_list = []
 
 #A loop that is always working
-while True:
-    #getting the user keys
-    user_input = getpass.getpass('')
 
-    #ignoring input other than keys from 1 to 9
-    if user_input in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
-        input_list.append(user_input)
-        print_list.append("*")
-        print (*print_list)
-        transition(user_input)
-    else:
-        #in case of a wrong input print wrong character 
-        print ("Wrong Character")
+numberofTrials = 5
+j = 0
 
-    #if the 6 digits are entrered but they are wrong then print wrong passcode
-    if len(input_list) == 6:
-        if input_list != ["5","6","1","7","6","1"]:
-            if input_list != ["5","6","1","7","6","4"]:
-                print ("wrong passcode")
-        input_list = []
-        print_list = []
-
+while current_state != 1:
+        print (lock_state)
+        transition(str(random.randint(0,9)))
 
 
     
